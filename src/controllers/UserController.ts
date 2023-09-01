@@ -94,6 +94,11 @@ class UserController {
   async update(req: Request, res: Response): Promise<void> {
     try {
       await body('display_name').notEmpty().isString().run(req);
+      await body('password')
+        .optional()
+        .isLength({ min: 6 })
+        .withMessage('Password must be at least 6 characters')
+        .run(req);
       await body('is_active').notEmpty().isBoolean().run(req);
       await body('roles').notEmpty().isString().run(req);
 
@@ -105,14 +110,20 @@ class UserController {
       }
 
       const { id } = req.params;
-      const { display_name, is_active, roles } = req.body;
+      const { display_name, password, is_active, roles } = req.body;
+
+      const objPayload =
+        password && password.length > 0
+          ? {
+              display_name,
+              password: bcrypt.hashSync(password, 10),
+              is_active,
+              roles,
+            }
+          : { display_name, is_active, roles };
 
       const updatedItem = await User.update(
-        {
-          display_name,
-          is_active,
-          roles,
-        },
+        { ...objPayload },
         {
           where: { login_id: id },
         },
