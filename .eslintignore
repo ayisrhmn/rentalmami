@@ -1,0 +1,7 @@
+# Ignored directory
+node_modules/
+dist/
+
+# Ignored files
+*.js
+*.d.ts
