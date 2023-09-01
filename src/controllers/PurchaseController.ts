@@ -22,7 +22,14 @@ class PurchaseController {
           {
             model: PurchaseDetail,
             as: 'details',
-            attributes: { exclude: ['purchase_headers', 'units'] },
+            attributes: {
+              exclude: [
+                'purchase_headers',
+                'units',
+                'created_at',
+                'updated_at',
+              ],
+            },
             include: [
               {
                 model: Unit,
@@ -54,7 +61,14 @@ class PurchaseController {
           {
             model: PurchaseDetail,
             as: 'details',
-            attributes: { exclude: ['purchase_headers', 'units'] },
+            attributes: {
+              exclude: [
+                'purchase_headers',
+                'units',
+                'created_at',
+                'updated_at',
+              ],
+            },
             include: [
               {
                 model: Unit,
