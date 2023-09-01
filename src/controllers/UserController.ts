@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { validationResult, body } from 'express-validator';
+import bcrypt from 'bcryptjs';
 import { User } from '../models';
 
 interface ErrorType {
@@ -29,7 +30,7 @@ class UserController {
     try {
       const { id } = req.params;
       const item = await User.findOne({
-        where: { id },
+        where: { login_id: id },
       });
 
       if (item) {
@@ -49,9 +50,20 @@ class UserController {
 
   async create(req: Request, res: Response): Promise<void> {
     try {
-      await body('username').notEmpty().isString().run(req);
+      await body('login_id')
+        .notEmpty()
+        .isString()
+        .isLength({ min: 6 })
+        .withMessage('Login ID must be at least 6 characters')
+        .run(req);
       await body('display_name').notEmpty().isString().run(req);
-      await body('email').notEmpty().isString().run(req);
+      await body('email').notEmpty().isEmail().run(req);
+      await body('password')
+        .notEmpty()
+        .isString()
+        .isLength({ min: 6 })
+        .withMessage('Password must be at least 6 characters')
+        .run(req);
       await body('is_active').notEmpty().isBoolean().run(req);
       await body('roles').notEmpty().isString().run(req);
 
@@ -63,7 +75,10 @@ class UserController {
       }
 
       const newItem = req.body;
-      await User.create(newItem);
+      await User.create({
+        ...newItem,
+        password: bcrypt.hashSync(newItem.password, 10),
+      });
 
       res.status(201).json({ message: 'Item has been created successfully.' });
     } catch (err) {
@@ -78,9 +93,7 @@ class UserController {
 
   async update(req: Request, res: Response): Promise<void> {
     try {
-      await body('username').notEmpty().isString().run(req);
       await body('display_name').notEmpty().isString().run(req);
-      await body('email').notEmpty().isString().run(req);
       await body('is_active').notEmpty().isBoolean().run(req);
       await body('roles').notEmpty().isString().run(req);
 
@@ -92,10 +105,18 @@ class UserController {
       }
 
       const { id } = req.params;
+      const { display_name, is_active, roles } = req.body;
 
-      const updatedItem = await User.update(req.body, {
-        where: { id },
-      });
+      const updatedItem = await User.update(
+        {
+          display_name,
+          is_active,
+          roles,
+        },
+        {
+          where: { login_id: id },
+        },
+      );
 
       if (updatedItem[0] === 1) {
         res
@@ -118,7 +139,7 @@ class UserController {
     try {
       const { id } = req.params;
       const deletedCount = await User.destroy({
-        where: { id },
+        where: { login_id: id },
       });
 
       if (deletedCount === 1) {

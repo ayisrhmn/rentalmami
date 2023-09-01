@@ -1,5 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
-import sequelize from '../config/db';
+import sequelize from '../config/db.config';
 
 class Unit extends Model {
   public readonly id!: string;

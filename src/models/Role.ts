@@ -1,5 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
-import sequelize from '../config/db';
+import sequelize from '../config/db.config';
 
 class Role extends Model {
   public readonly role_id!: string;
@@ -9,8 +9,8 @@ class Role extends Model {
 Role.init(
   {
     role_id: {
-      primaryKey: true,
       type: DataTypes.ENUM('developer', 'super-admin', 'admin'),
+      primaryKey: true,
       allowNull: false,
     },
     role_name: {

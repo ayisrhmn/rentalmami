@@ -4,6 +4,8 @@ import morgan from 'morgan';
 import helmet from 'helmet';
 import cors from 'cors';
 
+import appConfig from './config/app.config';
+
 import {
   unitRoutes,
   purchaseRoutes,
@@ -11,6 +13,7 @@ import {
   dashboardRoutes,
   roleRoutes,
   userRoutes,
+  authRoutes,
 } from './routes';
 
 interface Route {
@@ -20,7 +23,7 @@ interface Route {
 
 export const app: Express = express();
 
-app.use(morgan(process.env.NODE_ENV !== 'production' ? 'dev' : 'combined'));
+app.use(morgan(appConfig.environment !== 'production' ? 'dev' : 'combined'));
 app.use(helmet());
 app.use(cors());
 
@@ -34,12 +37,13 @@ app.use('/v1', [
   dashboardRoutes,
   roleRoutes,
   userRoutes,
+  authRoutes,
 ]);
 
-const PORT = process.env.APP_PORT;
-
-app.listen(PORT, () => {
-  console.log(`⚡️[rentalmami]: Server is running on port ${PORT}`);
+app.listen(appConfig.port, () => {
+  console.log(
+    `⚡️[${appConfig.appName}]: Server is running on port ${appConfig.port}`,
+  );
 
   if (process.env.NODE_ENV !== 'production') {
     console.log('List endpoints:');

@@ -1,5 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
-import sequelize from '../config/db';
+import sequelize from '../config/db.config';
 import SalesHeader from './SalesHeader';
 import Unit from './Unit';
 

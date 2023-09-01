@@ -4,6 +4,7 @@ import SalesController from './SalesController';
 import DashboardController from './DashboardController';
 import RoleController from './RoleController';
 import UserController from './UserController';
+import AuthController from './AuthController';
 
 export {
   UnitController,
@@ -12,4 +13,5 @@ export {
   DashboardController,
   RoleController,
   UserController,
+  AuthController,
 };

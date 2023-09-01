@@ -4,6 +4,7 @@ import salesRoutes from './salesRoutes';
 import dashboardRoutes from './dashboardRoutes';
 import roleRoutes from './roleRoutes';
 import userRoutes from './userRoutes';
+import authRoutes from './authRoutes';
 
 export {
   unitRoutes,
@@ -12,4 +13,5 @@ export {
   dashboardRoutes,
   roleRoutes,
   userRoutes,
+  authRoutes,
 };

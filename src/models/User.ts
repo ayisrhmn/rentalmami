@@ -1,20 +1,21 @@
 import { DataTypes, Model } from 'sequelize';
-import sequelize from '../config/db';
+import sequelize from '../config/db.config';
 import Role from './Role';
 
 class User extends Model {
-  public readonly id!: string;
-  public username!: string;
+  public readonly login_id!: string;
   public display_name!: string;
   public email!: string;
+  public password!: string;
   public is_active!: boolean;
   public roles!: string;
 }
 
 User.init(
   {
-    username: {
+    login_id: {
       type: DataTypes.STRING,
+      primaryKey: true,
       allowNull: false,
     },
     display_name: {
@@ -22,6 +23,10 @@ User.init(
       allowNull: false,
     },
     email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    password: {
       type: DataTypes.STRING,
       allowNull: false,
     },

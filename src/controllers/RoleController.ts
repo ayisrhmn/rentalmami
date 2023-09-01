@@ -27,9 +27,9 @@ class RoleController {
 
   async get(req: Request, res: Response): Promise<void> {
     try {
-      const { role_id } = req.params;
+      const { id } = req.params;
       const item = await Role.findOne({
-        where: { role_id },
+        where: { role_id: id },
       });
 
       if (item) {
@@ -84,13 +84,13 @@ class RoleController {
         return;
       }
 
-      const { role_id } = req.params;
+      const { id } = req.params;
       const { role_name } = req.body;
 
       const updatedItem = await Role.update(
         { role_name },
         {
-          where: { role_id },
+          where: { role_id: id },
         },
       );
 
@@ -113,9 +113,9 @@ class RoleController {
 
   async delete(req: Request, res: Response): Promise<void> {
     try {
-      const { role_id } = req.params;
+      const { id } = req.params;
       const deletedCount = await Role.destroy({
-        where: { role_id },
+        where: { role_id: id },
       });
 
       if (deletedCount === 1) {
