@@ -11,7 +11,7 @@ interface ErrorType {
   message: string;
 }
 
-class PurchaseController {
+class DashboardController {
   async overview(_req: Request, res: Response): Promise<void> {
     try {
       const total_units = await Unit.count();
@@ -69,4 +69,4 @@ class PurchaseController {
   }
 }
 
-export default new PurchaseController();
+export default new DashboardController();

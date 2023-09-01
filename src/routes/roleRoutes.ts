@@ -1,12 +1,14 @@
 import express from 'express';
 import { RoleController } from '../controllers';
+import { AuthMiddleware } from '../middleware';
 
 const router = express.Router();
+const { isLogin } = AuthMiddleware;
 
-router.get('/roles', RoleController.gets);
-router.get('/roles/:id', RoleController.get);
-router.post('/roles', RoleController.create);
-router.put('/roles/:id', RoleController.update);
-router.delete('/roles/:id', RoleController.delete);
+router.get('/roles', isLogin, RoleController.gets);
+router.get('/roles/:id', isLogin, RoleController.get);
+router.post('/roles', isLogin, RoleController.create);
+router.put('/roles/:id', isLogin, RoleController.update);
+router.delete('/roles/:id', isLogin, RoleController.delete);
 
 export default router;

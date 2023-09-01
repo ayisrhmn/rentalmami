@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import appConfig from '../config/app.config';
@@ -8,8 +8,8 @@ interface ErrorType {
   message: string;
 }
 
-class RoleController {
-  async login(req: Request, res: Response): Promise<void> {
+class AuthController {
+  async login(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const { login_id, password } = req.body;
 
@@ -29,6 +29,7 @@ class RoleController {
                   },
                 },
                 appConfig.secretKey,
+                { expiresIn: '1d' },
               );
 
               res.status(200).json({ message: 'success', data: { token } });
@@ -46,6 +47,8 @@ class RoleController {
               ? error.message
               : 'An error occurred while login.',
           });
+
+          next();
         });
     } catch (err) {
       const error = err as ErrorType;
@@ -58,4 +61,4 @@ class RoleController {
   }
 }
 
-export default new RoleController();
+export default new AuthController();
