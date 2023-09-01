@@ -4,7 +4,12 @@ import morgan from 'morgan';
 import helmet from 'helmet';
 import cors from 'cors';
 
-import { unitRoutes, purchaseRoutes, salesRoutes } from './routes';
+import {
+  unitRoutes,
+  purchaseRoutes,
+  salesRoutes,
+  dashboardRoutes,
+} from './routes';
 
 interface Route {
   methods: string[];
@@ -20,7 +25,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use('/v1', [unitRoutes, purchaseRoutes, salesRoutes]);
+app.use('/v1', [unitRoutes, purchaseRoutes, salesRoutes, dashboardRoutes]);
 
 const PORT = process.env.APP_PORT;
 
