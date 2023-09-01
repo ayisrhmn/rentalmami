@@ -9,7 +9,7 @@ class PurchaseHeader extends Model {
   public supplier_address!: string;
   public trx_date!: Date;
   public trx_due_date!: Date;
-  public status!: string;
+  public paid_off!: boolean;
   public grand_total!: number;
 }
 
@@ -35,8 +35,8 @@ PurchaseHeader.init(
       type: DataTypes.DATE,
       allowNull: true,
     },
-    status: {
-      type: DataTypes.STRING,
+    paid_off: {
+      type: DataTypes.BOOLEAN,
       allowNull: false,
     },
     grand_total: {

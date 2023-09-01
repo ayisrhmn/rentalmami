@@ -89,7 +89,7 @@ class PurchaseController {
       await body('header.supplier_address').notEmpty().isString().run(req);
       await body('header.trx_date').notEmpty().isDate().run(req);
       await body('header.trx_due_date').optional().run(req);
-      await body('header.status').notEmpty().isString().run(req);
+      await body('header.paid_off').notEmpty().isBoolean().run(req);
       await body('header.grand_total').notEmpty().isInt().run(req);
 
       // validation purchase details
@@ -133,7 +133,7 @@ class PurchaseController {
       await body('header.supplier_address').notEmpty().isString().run(req);
       await body('header.trx_date').notEmpty().isDate().run(req);
       await body('header.trx_due_date').optional().run(req);
-      await body('header.status').notEmpty().isString().run(req);
+      await body('header.paid_off').notEmpty().isBoolean().run(req);
       await body('header.grand_total').notEmpty().isInt().run(req);
 
       // validation purchase details
