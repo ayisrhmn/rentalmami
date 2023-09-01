@@ -4,6 +4,7 @@ import PurchaseDetail from './PurchaseDetail';
 import SalesHeader from './SalesHeader';
 import SalesDetail from './SalesDetail';
 import SalesDocument from './SalesDocument';
+import Role from './Role';
 
 export {
   Unit,
@@ -12,4 +13,5 @@ export {
   SalesHeader,
   SalesDetail,
   SalesDocument,
+  Role,
 };

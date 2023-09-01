@@ -9,6 +9,7 @@ import {
   purchaseRoutes,
   salesRoutes,
   dashboardRoutes,
+  roleRoutes,
 } from './routes';
 
 interface Route {
@@ -25,7 +26,13 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use('/v1', [unitRoutes, purchaseRoutes, salesRoutes, dashboardRoutes]);
+app.use('/v1', [
+  unitRoutes,
+  purchaseRoutes,
+  salesRoutes,
+  dashboardRoutes,
+  roleRoutes,
+]);
 
 const PORT = process.env.APP_PORT;
 
