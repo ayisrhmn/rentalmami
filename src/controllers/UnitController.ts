@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { validationResult, body } from 'express-validator';
-import { Unit, PurchaseDetail } from '../models';
+import { Unit, PurchaseDetail, SalesDetail } from '../models';
 
 interface ErrorType {
   message: string;
@@ -12,12 +12,15 @@ class UnitController {
       const items = await Unit.findAll();
       const unitsWithStock = await Promise.all(
         items.map(async (unit) => {
-          const totalStock = await PurchaseDetail.sum('qty', {
+          const totalPurchase = await PurchaseDetail.sum('qty', {
+            where: { units: unit.id },
+          });
+          const totalSales = await SalesDetail.sum('qty', {
             where: { units: unit.id },
           });
           return {
             ...unit.toJSON(),
-            stock: totalStock || 0,
+            stock: totalPurchase - totalSales || 0,
           };
         }),
       );
