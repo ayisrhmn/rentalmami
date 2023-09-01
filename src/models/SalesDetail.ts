@@ -8,6 +8,7 @@ class SalesDetail extends Model {
   public qty!: number;
   public sales_price!: number;
   public total!: number;
+  public is_returned!: boolean;
   public sales_headers!: string;
   public units!: string;
 }
@@ -24,6 +25,10 @@ SalesDetail.init(
     },
     total: {
       type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    is_returned: {
+      type: DataTypes.BOOLEAN,
       allowNull: false,
     },
     sales_headers: {

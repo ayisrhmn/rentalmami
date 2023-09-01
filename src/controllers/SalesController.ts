@@ -7,6 +7,7 @@ interface DetailItem {
   qty: number;
   sales_price: number;
   total: number;
+  is_returned: boolean;
   units: string;
 }
 
@@ -126,6 +127,7 @@ class SalesController {
       await body('details.*.qty').notEmpty().isInt().run(req);
       await body('details.*.sales_price').notEmpty().isInt().run(req);
       await body('details.*.total').notEmpty().isInt().run(req);
+      await body('details.*.is_returned').notEmpty().isBoolean().run(req);
       await body('details.*.units').notEmpty().isString().run(req);
 
       const errors = validationResult(req);
@@ -182,6 +184,7 @@ class SalesController {
       await body('details.*.qty').notEmpty().isInt().run(req);
       await body('details.*.sales_price').notEmpty().isInt().run(req);
       await body('details.*.total').notEmpty().isInt().run(req);
+      await body('details.*.is_returned').notEmpty().isBoolean().run(req);
       await body('details.*.units').notEmpty().isString().run(req);
 
       const errors = validationResult(req);
@@ -245,6 +248,7 @@ class SalesController {
                 qty: item.qty,
                 sales_price: item.sales_price,
                 total: item.total,
+                is_returned: item.is_returned,
                 units: item.units,
               },
               {

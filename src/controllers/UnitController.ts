@@ -16,7 +16,7 @@ class UnitController {
             where: { units: unit.id },
           });
           const totalSales = await SalesDetail.sum('qty', {
-            where: { units: unit.id },
+            where: { units: unit.id, is_returned: false },
           });
           return {
             ...unit.toJSON(),
