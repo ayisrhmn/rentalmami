@@ -14,7 +14,7 @@ class RoleController {
       const items = await Role.findAll();
       const filtered = items.filter((item) => item.role_id !== 'developer');
 
-      res.status(200).json(is_dev ? filtered : items);
+      res.status(200).json(is_dev ? items : filtered);
     } catch (err) {
       const error = err as ErrorType;
       res.status(500).json({
