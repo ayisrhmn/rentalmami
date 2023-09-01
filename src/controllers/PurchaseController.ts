@@ -93,10 +93,10 @@ class PurchaseController {
       await body('header.grand_total').notEmpty().isInt().run(req);
 
       // validation purchase details
-      await body('detail.*.qty').notEmpty().isInt().run(req);
-      await body('detail.*.purchase_price').notEmpty().isInt().run(req);
-      await body('detail.*.total').notEmpty().isInt().run(req);
-      await body('detail.*.units').notEmpty().isString().run(req);
+      await body('details.*.qty').notEmpty().isInt().run(req);
+      await body('details.*.purchase_price').notEmpty().isInt().run(req);
+      await body('details.*.total').notEmpty().isInt().run(req);
+      await body('details.*.units').notEmpty().isString().run(req);
 
       const errors = validationResult(req);
 
@@ -137,10 +137,10 @@ class PurchaseController {
       await body('header.grand_total').notEmpty().isInt().run(req);
 
       // validation purchase details
-      await body('detail.*.qty').notEmpty().isInt().run(req);
-      await body('detail.*.purchase_price').notEmpty().isInt().run(req);
-      await body('detail.*.total').notEmpty().isInt().run(req);
-      await body('detail.*.units').notEmpty().isString().run(req);
+      await body('details.*.qty').notEmpty().isInt().run(req);
+      await body('details.*.purchase_price').notEmpty().isInt().run(req);
+      await body('details.*.total').notEmpty().isInt().run(req);
+      await body('details.*.units').notEmpty().isString().run(req);
 
       const errors = validationResult(req);
 
