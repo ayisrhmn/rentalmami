@@ -1,0 +1,39 @@
+{
+  "name": "rentalmami",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "prod": "node dist/app",
+    "dev": "ts-node -r tsconfig-paths/register src/app",
+    "dev:watch": "ts-node-dev -r tsconfig-paths/register src/app",
+    "build": "tsc -p .",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-list-endpoints": "^6.0.0",
+    "express-validators": "^1.0.4",
+    "helmet": "^7.0.0",
+    "morgan": "^1.10.0",
+    "pg": "^8.11.3",
+    "sequelize": "^6.32.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
+    "@types/express-list-endpoints": "^6.0.0",
+    "@types/express-validator": "^3.0.0",
+    "@types/morgan": "^1.9.4",
+    "@types/pg": "^8.10.2",
+    "@typescript-eslint/eslint-plugin": "^6.5.0",
+    "@typescript-eslint/parser": "^6.5.0",
+    "eslint": "^8.48.0",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.1.6"
+  }
+}
