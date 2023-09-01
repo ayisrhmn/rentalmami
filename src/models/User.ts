@@ -53,6 +53,6 @@ User.init(
   },
 );
 
-// User.hasOne(Role);
+User.belongsTo(Role, { foreignKey: 'roles', as: 'detail_role' });
 
 export default User;

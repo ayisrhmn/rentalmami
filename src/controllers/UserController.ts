@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { validationResult, body } from 'express-validator';
 import bcrypt from 'bcryptjs';
-import { User } from '../models';
+import { User, Role } from '../models';
 
 interface ErrorType {
   message: string;
@@ -12,7 +12,16 @@ class UserController {
     try {
       const { is_dev } = req.body;
 
-      const items = await User.findAll();
+      const items = await User.findAll({
+        attributes: { exclude: ['password'] },
+        include: [
+          {
+            model: Role,
+            as: 'detail_role',
+            attributes: { exclude: ['created_at', 'updated_at'] },
+          },
+        ],
+      });
       const filtered = items.filter((item) => item.roles !== 'developer');
 
       res.status(200).json(is_dev ? items : filtered);
@@ -31,6 +40,14 @@ class UserController {
       const { id } = req.params;
       const item = await User.findOne({
         where: { login_id: id },
+        attributes: { exclude: ['password'] },
+        include: [
+          {
+            model: Role,
+            as: 'detail_role',
+            attributes: { exclude: ['created_at', 'updated_at'] },
+          },
+        ],
       });
 
       if (item) {
