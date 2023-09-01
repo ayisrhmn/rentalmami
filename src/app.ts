@@ -10,6 +10,7 @@ import {
   salesRoutes,
   dashboardRoutes,
   roleRoutes,
+  userRoutes,
 } from './routes';
 
 interface Route {
@@ -32,6 +33,7 @@ app.use('/v1', [
   salesRoutes,
   dashboardRoutes,
   roleRoutes,
+  userRoutes,
 ]);
 
 const PORT = process.env.APP_PORT;
