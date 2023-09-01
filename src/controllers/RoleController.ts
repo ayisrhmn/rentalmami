@@ -7,11 +7,14 @@ interface ErrorType {
 }
 
 class RoleController {
-  async gets(_req: Request, res: Response): Promise<void> {
+  async gets(req: Request, res: Response): Promise<void> {
     try {
-      const items = await Role.findAll();
+      const { is_dev } = req.body;
 
-      res.status(200).json(items);
+      const items = await Role.findAll();
+      const filtered = items.filter((item) => item.role_id !== 'developer');
+
+      res.status(200).json(is_dev ? filtered : items);
     } catch (err) {
       const error = err as ErrorType;
       res.status(500).json({

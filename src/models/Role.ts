@@ -10,7 +10,7 @@ Role.init(
   {
     role_id: {
       primaryKey: true,
-      type: DataTypes.STRING,
+      type: DataTypes.ENUM('developer', 'super-admin', 'admin'),
       allowNull: false,
     },
     role_name: {
